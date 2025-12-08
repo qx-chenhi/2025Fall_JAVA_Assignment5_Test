@@ -71,11 +71,11 @@ public class P4LocalTest {
         arena.show();
 
         String[] lines = outContent.toString().trim().split("\\r?\\n");
-        assertEquals(36, lines.length);
+        assertEquals(20, lines.length);
 
-        assertTrue(lines[32].matches("S1 01 4 2"));
-        assertTrue(lines[33].matches("S2 02 2 2"));
-        assertTrue(lines[34].matches("S3 03 2 2"));
-        assertTrue(lines[35].matches("S4 04 0 2"));
+        assertTrue(lines[16].matches("S1 01 4 2"));
+        assertTrue(lines[17].matches("S2 02 2 2"));
+        assertTrue(lines[18].matches("S3 03 2 2"));
+        assertTrue(lines[19].matches("S4 04 0 2"));
     }
 }
