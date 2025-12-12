@@ -81,6 +81,34 @@ public class P4LocalTest {
         assertTrue(lines[18].matches("S3 03 2 2"));
         assertTrue(lines[19].matches("S4 04 0 2"));
     }
+
+    
+    @Test
+    void testFreeForAllAwayDrawAndDefeat() {
+        Arena arena = new Arena();
+
+        Sprite s1 = new Sprite("S1", "01", ElementType.WATER, 200, new AttackSkill(50), new AttackSkill(50));
+        Sprite s2 = new Sprite("S2", "02", ElementType.WATER, 150, new HealingSkill(30), new HealingSkill(30));
+        Sprite s3 = new Sprite("S3", "03", ElementType.WATER, 100, new HealingSkill(20), new HealingSkill(20));
+
+        arena.getSprites().add(s1);
+        arena.getSprites().add(s2);
+        arena.getSprites().add(s3);
+
+        arena.addBattle(new Battle(s1, s2));
+        arena.addBattle(new Battle(s3, s2));
+
+        arena.beginFreeForAllBattle();
+        arena.show();
+
+        String[] lines = outContent.toString().trim().split("\\r?\\n");
+        assertEquals(54, lines.length);
+
+        assertTrue(lines[51].matches("S1 01 2 1"));
+        assertTrue(lines[52].matches("S3 03 1 1"));
+        assertTrue(lines[53].matches("S2 02 1 2"));
+    }
+    
     @Test
     void test() {
         Arena arena = new Arena();
@@ -132,3 +160,4 @@ public class P4LocalTest {
         assertEquals(normalize(expectedOutput), normalize(outContent.toString()));
     }
 }
+
